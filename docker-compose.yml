@@ -16,7 +16,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: testdb
+      MYSQL_DATABASE: taloushallinto
       MYSQL_USER: user
       MYSQL_PASSWORD: pass
     ports:
