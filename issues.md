@@ -10,7 +10,7 @@ Sovelluksen ulkoasu on hyvin yksinkertainen ja vanhanaikainen. Käytetään inli
 2. Huomaa yksinkertainen fontti, värit ja layout.
 
 **Odotettu toiminta:**  
-Ulkoasu pitäisi päivittää modernilla CSS-frameworkilla (kuten Bootstrap tai Tailwind) tai mukautetulla tyylillä, joka sisältää paremman typografian, värit ja visuaalisen hierarkian.
+Ulkoasu pitäisi päivittää modernilla CSS-frameworkilla (kuten Bootstrap tai Tailwind) tai mukautetulla tyylillä, joka sisältää paremman typografian, värit ja visuaalisen hierarkian. Käytä design -kansiossa olevaa logoa ja wireframeja.
 
 **Todellinen toiminta:**  
 Perus HTML ja inline-CSS ilman suunnittelua.
