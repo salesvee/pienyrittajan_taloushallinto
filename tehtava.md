@@ -1,4 +1,4 @@
-Tämä harjoitus on suunniteltu opiskelijoille GitHub-issueiden ja -branchien käytön, tekoälyagentin avustaman työn sekä koodaamisen harjoitteluun.
+Tämä harjoitus on suunniteltu opiskelijoille GitHub-issueiden ja -branchien käytön, tekoälyagentin avustaman työn sekä koodaamisen harjoitteluun. Tehtävä toteutetaan ryhmätyönä, joten tiimityöskentely ja vastuunjako ovat osa oppimisprosessia.
 
 Tehtävän tavoitteena on:
 
