@@ -17,7 +17,9 @@ Perus HTML ja inline-CSS ilman suunnittelua.
 
 **Vakavuus:** Matala  
 **Prioriteetti:** Matala  
-**Tunnisteet:** ulkoasu, käyttöliittymä, suunnittelu</content>
+**Tunnisteet:** ulkoasu, käyttöliittymä, suunnittelu
+
+
 
 
 ## Ongelma 2: Ei responsiivista suunnittelua mobiililaitteille
@@ -39,7 +41,83 @@ Kiinteä leveys ja perus-CSS ilman responsiivisuutta.
 **Prioriteetti:** Keskitaso  
 **Tunnisteet:** ulkoasu, responsiivisuus, mobiili
 
-## Ongelma 3: Kovakoodatut tietokantatunnukset konfiguraatiotiedostossa
+## Ongelma 3: Ei autentikointia tai käyttäjien hallintaa
+
+**Kuvaus:**  
+Sovelluksessa ei ole minkäänlaista autentikointia tai käyttäjien hallintaa. Kuka tahansa voi käyttää sovellusta ja muokata tietoja ilman kirjautumista.
+
+**Toistettavat vaiheet:**  
+1. Avaa sovellus suoraan selaimessa.  
+2. Huomaa, ettei ole kirjautumissivua tai käyttäjän vahvistusta.
+
+**Odotettu toiminta:**  
+Sovelluksen pitäisi vaatia kirjautuminen ja mahdollisesti tukea useita käyttäjiä rooleineen.
+
+**Todellinen toiminta:**  
+Ei autentikointia, kaikki pääsevät käsiksi kaikkiin toimintoihin.
+
+**Vakavuus:** Korkea  
+**Prioriteetti:** Korkea  
+**Tunnisteet:** turvallisuus, autentikointi, käyttäjähallinta
+
+## Ongelma 4: Ei GET-parametrien validointia vientitoiminnossa
+
+**Kuvaus:**  
+Tiedostossa `tax_reports.php` vienti käyttää `$_GET['export']`-parametria ilman validointia. Vaikka vain tietyt arvot toimivat, tämä voi johtaa virheisiin tai mahdollistaa epätoivotun käytön.
+
+**Toistettavat vaiheet:**  
+1. Muokkaa URL:ia lisäämällä ?export=invalid.  
+2. Huomaa, ettei validointia tapahdu.
+
+**Odotettu toiminta:**  
+GET-parametrit pitäisi validoida ja sallia vain tunnetut arvot.
+
+**Todellinen toiminta:**  
+Parametri otetaan suoraan käyttöön.
+
+**Vakavuus:** Keskitaso  
+**Prioriteetti:** Keskitaso  
+**Tunnisteet:** validointi, turvallisuus, vienti
+
+## Ongelma 5: Ei hakua tai suodatusta tapahtumille
+
+**Kuvaus:**  
+Sovelluksessa ei ole hakutoimintoa tai suodatusta tapahtumille. Käyttäjät eivät voi etsiä tiettyjä tapahtumia kuvauksen, päivämäärän tai kategorian perusteella.
+
+**Toistettavat vaiheet:**  
+1. Katso tapahtumalistaa.  
+2. Huomaa, ettei ole hakukenttää tai suodattimia.
+
+**Odotettu toiminta:**  
+Pitäisi olla hakutoiminto ja suodattimet päivämäärän, kategorian ja summan mukaan.
+
+**Todellinen toiminta:**  
+Vain viimeisimmät 10 tapahtumaa näytetään ilman hakua.
+
+**Vakavuus:** Keskitaso  
+**Prioriteetti:** Keskitaso  
+**Tunnisteet:** käyttöliittymä, toiminnallisuus, haku
+
+## Ongelma 6: Ei kaavioita tai visualisointeja raporteissa
+
+**Kuvaus:**  
+Raportit näyttävät vain numeroita taulukoissa ilman kaavioita tai visualisointeja, mikä tekee tiedon ymmärtämisestä vaikeampaa.
+
+**Toistettavat vaiheet:**  
+1. Avaa raporttisivu.  
+2. Huomaa, ettei ole kaavioita tuloista, menoista tai voitoista.
+
+**Odotettu toiminta:**  
+Raporttien pitäisi sisältää kaavioita (esim. pylväsdiagrammeja) tulojen ja menojen visualisoimiseksi.
+
+**Todellinen toiminta:**  
+Vain tekstimuotoiset numerot ja taulukot.
+
+**Vakavuus:** Matala  
+**Prioriteetti:** Matala  
+**Tunnisteet:** raportointi, visualisointi, käyttöliittymä</content>
+
+## Ongelma 7: Kovakoodatut tietokantatunnukset konfiguraatiotiedostossa
 
 **Kuvaus:**  
 Tietokantatunnukset ovat kovakoodattuja tiedostossa `config.php` käyttäen `define()`-lauseita. Tämä on turvallisuusriski, koska arkaluonteiset tiedot ovat näkyvissä lähdekoodissa.
@@ -58,7 +136,7 @@ Tunnukset ovat kovakoodattuja.
 **Prioriteetti:** Korkea  
 **Tunnisteet:** turvallisuus, konfiguraatio
 
-## Ongelma 4: Ei syötteen validointia tai puhdistusta lomakkeissa
+## Ongelma 8: Ei syötteen validointia tai puhdistusta lomakkeissa
 
 **Kuvaus:**  
 Tiedostossa `add_transaction.php` käyttäjän syötteet käytetään suoraan tietokantakyselyissä ilman validointia tai puhdistusta. Tämä voi johtaa virheellisiin tietoihin tai mahdollisiin turvallisuusongelmiin, vaikka valmiita lauseita käytetäänkin.
@@ -77,7 +155,7 @@ Ei validointia.
 **Prioriteetti:** Keskitaso  
 **Tunnisteet:** validointi, turvallisuus
 
-## Ongelma 5: Ei virheenkäsittelyä tietokantakyselyille
+## Ongelma 9: Ei virheenkäsittelyä tietokantakyselyille
 
 **Kuvaus:**  
 Koko sovelluksessa tietokantakyselyt eivät sisällä asianmukaista virheenkäsittelyä. Jos kysely epäonnistuu, sovellus voi kaatua tai näyttää virheitä käyttäjille.
@@ -99,7 +177,7 @@ PDO-poikkeukset voivat heittää suoraan.
 
 
 
-## Ongelma 6: Mahdolliset XSS-haavoittuvuudet tulosteessa
+## Ongelma 10: Mahdolliset XSS-haavoittuvuudet tulosteessa
 
 **Kuvaus:**  
 Tiedostoissa `index.php` ja muissa tiedostoissa tietokannasta tulevat tiedot tulostetaan suoraan HTML:ään ilman koodausta. Jos käyttäjän syöte sisältää HTML/JavaScript-koodia, se voi johtaa XSS-hyökkäyksiin.
@@ -119,7 +197,7 @@ Tiedot tulostetaan raakana.
 **Prioriteetti:** Korkea  
 **Tunnisteet:** turvallisuus, xss
 
-## Ongelma 7: Raportit eivät huomioi vuotta
+## Ongelma 11: Raportit eivät huomioi vuotta
 
 **Kuvaus:**  
 Tiedostossa `reports.php` kvartaaliraportit kysyvät kuukauden mukaan ilman vuoden määrittämistä, joten ne sisältävät tietoja kaikista vuosista.
@@ -139,7 +217,7 @@ Kaikki historiatiedot sisältyvät.
 **Prioriteetti:** Keskitaso  
 **Tunnisteet:** raportointi, päivämääräsuodatus
 
-## Ongelma 8: CSV-viennin tiedostonimen injektioriski
+## Ongelma 12: CSV-viennin tiedostonimen injektioriski
 
 **Kuvaus:**  
 Tiedostossa `tax_reports.php` vientitiedoston nimi on kovakoodattu, mutta jos se olisi dynaaminen, se voisi olla haavoittuva header-injektiolle. Tällä hetkellä turvallinen, mutta malli on riskialtis.
@@ -157,7 +235,7 @@ Kovakoodattu, mutta malli voisi parantaa.
 **Prioriteetti:** Matala  
 **Tunnisteet:** turvallisuus, vienti
 
-## Ongelma 9: Ei sivutusta tapahtumalistauksessa
+## Ongelma 13: Ei sivutusta tapahtumalistauksessa
 
 **Kuvaus:**  
 Tiedostossa `index.php` vain viimeisimmät 10 tapahtumaa näytetään `LIMIT 10`:llä, mutta ei ole sivutusta useammille tapahtumille.
@@ -176,7 +254,7 @@ Vain viimeisimmät 10 näytetään.
 **Prioriteetti:** Matala  
 **Tunnisteet:** käyttöliittymä, sivutus
 
-## Ongelma 10: Kategoria-enum sisältää tarpeettoman 'income'-kategorian
+## Ongelma 14: Kategoria-enum sisältää tarpeettoman 'income'-kategorian
 
 **Kuvaus:**  
 Tiedostossa `schema.sql` kategoria-enum sisältää 'income'-kategorian tulotapahtumille, mutta koska tyyppi jo erottaa tulot/menot, tämä on tarpeetonta ja voisi yksinkertaistaa.
@@ -194,7 +272,7 @@ Kategorioiden pitäisi olla spesifisempiä, kuten 'myynti', 'palvelut' tuloille.
 **Prioriteetti:** Matala  
 **Tunnisteet:** tietokanta, skeema
 
-## Ongelma 11: Virheellinen ALV-summan laskenta tapahtuman lisäämisessä
+## Ongelma 15: Virheellinen ALV-summan laskenta tapahtuman lisäämisessä
 
 **Kuvaus:**  
 ALV-summan laskenta tiedostossa `add_transaction.php` on virheellinen. Nykyinen kaava `$vat_amount = ($amount * $vat_rate / 100) / (1 + $vat_rate / 100)` olettaa, että syötetty summa sisältää ALV:n, mutta `schema.sql`:n esimerkkidatan perusteella summa näyttää olevan netto-summa, ja ALV pitäisi laskea kaavalla `$vat_amount = $amount * $vat_rate / 100`.
@@ -216,7 +294,7 @@ ALV-summa lasketaan noin 19,35:ksi.
 
 
 
-## Ongelma 12: Ei CSRF-suojausta lomakkeissa
+## Ongelma 16: Ei CSRF-suojausta lomakkeissa
 
 **Kuvaus:**  
 Tapahtuman lisäyslomake tiedostossa `add_transaction.php` ei sisällä CSRF-suojausta, mikä tekee siitä haavoittuvan cross-site request forgery -hyökkäyksille.
